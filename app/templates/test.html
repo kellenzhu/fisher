@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block start %}
+    {{ super() }}
+    {# super()，从block start继承而不是复写 #}
+
+    {% if data.age == 24 %}
+        {{ data.age }}
+    {% endif %}
+{% endblock %}

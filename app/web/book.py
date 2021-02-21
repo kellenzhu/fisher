@@ -1,6 +1,6 @@
 import json
 
-from flask import jsonify, request
+from flask import jsonify, request, render_template
 
 from app.forms.book import SearchForm
 from app.libs.helper import is_isbn_or_key
@@ -30,9 +30,18 @@ def search():
         else:
             yushu_book.search_by_keyword(q, page)
         books.full(yushu_book, q)
-        
+
         # TypeError: Object of type BookCollection is not JSON serializable
         # return jsonify(books)
         return json.dumps(books, default=lambda o: o.__dict__), 200, {"content-type": "application/json"}
     else:
         return jsonify(form.errors)
+
+
+@web.route("/test")
+def test():
+    r = {
+        "name": "kellen",
+        "age": 24
+    }
+    return render_template("test.html", data=r)
