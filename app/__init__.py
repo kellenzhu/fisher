@@ -9,10 +9,10 @@ def create_app():
     app.config.from_object('app.secure')
     app.config.from_object('app.setting')
     register_buleprint(app)
-    db.init_app(app)
+    # db.init_app(app)
     # db.create_all(app=app)
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
     return app
 
 

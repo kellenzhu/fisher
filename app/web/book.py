@@ -1,6 +1,6 @@
 import json
 
-from flask import jsonify, request, render_template
+from flask import jsonify, request, render_template, flash
 
 from app.forms.book import SearchForm
 from app.libs.helper import is_isbn_or_key
@@ -44,4 +44,6 @@ def test():
         "name": "kellen",
         "age": 24
     }
+    flash(message="Flash, Message")
+
     return render_template("test.html", data=r)

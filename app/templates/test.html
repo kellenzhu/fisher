@@ -5,5 +5,10 @@
 
     {% if data.age == 24 %}
         {{ data.age }}
-    {% endif %}
+        {{ data.age | default("default string") }}
+        {% with messages = get_flashed_messages() %}
+            {{ messages }}
+        {% endwith %}
+    {% endif %}<br>
+    {{ messages }}
 {% endblock %}
