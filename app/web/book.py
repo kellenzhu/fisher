@@ -1,6 +1,4 @@
-import json
-
-from flask import jsonify, request, render_template, flash
+from flask import request, render_template, flash
 
 from app.forms.book import SearchForm
 from app.libs.helper import is_isbn_or_key
@@ -33,9 +31,16 @@ def search():
 
         # TypeError: Object of type BookCollection is not JSON serializable
         # return jsonify(books)
-        return json.dumps(books, default=lambda o: o.__dict__), 200, {"content-type": "application/json"}
+        # return json.dumps(books, default=lambda o: o.__dict__), 200, {"content-type": "application/json"}
     else:
-        return jsonify(form.errors)
+        # return jsonify(form.errors)
+        flash(message="搜索的关键字不符合要求，请重新输入关键字")
+    return render_template("search_result.html", books=books)
+
+
+@web.route("/book/<isbn>/detail")
+def book_detail(isbn):
+    pass
 
 
 @web.route("/test")
