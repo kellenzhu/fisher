@@ -7,6 +7,7 @@ class BookViewModel:
         self.price = book["price"]
         self.summary = book["summary"] or ""
         self.image = book["image"]
+        self.isbn = book["isbn"]
 
     @property
     def intro(self):
