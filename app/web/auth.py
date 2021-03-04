@@ -1,6 +1,7 @@
 from flask import render_template, request
 
 from app.forms.auth import RegisterForm
+from app.models.base import db
 from app.models.user import User
 from app.web import web
 
@@ -9,12 +10,14 @@ __author__ = '七月'
 
 @web.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
+    form = RegisterForm(request.form)
     if request.method == "POST" and form.validate():
         user = User()
-        user.email = form.email.data()
+        user.set_attrs(form.data)
+        db.session.add(user)
+        db.session.commit()
+    return render_template("auth/register.html", form=form)
 
-    return render_template("auth/register.html", form={"data": {}})
 
 @web.route('/login', methods=['GET', 'POST'])
 def login():

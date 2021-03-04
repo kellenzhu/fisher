@@ -13,6 +13,6 @@ class Base(db.Model):
     status = Column(SmallInteger, default=1)
 
     def set_attrs(self, dict_attrs):
-        for key, value in dict_attrs.itmes():
+        for key, value in dict_attrs.items():
             if hasattr(self, key) and key != "id":
                 setattr(self, key, value)
