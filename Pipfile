@@ -16,6 +16,7 @@ virtualenv = "==20.4.0"
 virtualenv-clone = "==0.5.4"
 PyMySQL = "==1.0.2"
 SQLAlchemy = "==1.3.22"
+email-validator = "*"
 
 [dev-packages]
 
