@@ -1,7 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, SmallInteger
 
-db = SQLAlchemy()
+from app import db
 
 
 class Base(db.Model):

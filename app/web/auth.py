@@ -1,4 +1,5 @@
-from flask import render_template, request, flash
+from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_user
 
 from app.forms.auth import RegisterForm, LoginForm
 from app.models.base import db
@@ -16,6 +17,7 @@ def register():
         user.set_attrs(form.data)
         db.session.add(user)
         db.session.commit()
+        return redirect(url_for("web.index"))
     return render_template("auth/register.html", form=form)
 
 
@@ -25,7 +27,11 @@ def login():
     if request.method == "POST" and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
-            pass
+            login_user(user)
+            jump_page = request.args.get("next")
+            if not jump_page or not jump_page.startswitch("/"):
+                return redirect(url_for("web.login"))
+            return redirect(jump_page)
         else:
             flash(message="用户不存在，请重新输入")
     return render_template("auth/login.html", form=form)
