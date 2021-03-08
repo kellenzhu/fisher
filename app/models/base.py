@@ -1,6 +1,22 @@
+from contextlib import contextmanager
+
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from sqlalchemy import Column, SmallInteger
 
-from app import db
+
+class SQLAlchemy(_SQLAlchemy):
+    @contextmanager
+    def auto_commit(self):
+        try:
+            yield
+            self.session.commit()
+        except Exception as e:
+            # db.session.commit会保证事务一致性，但一旦插入操作出现异常则需要立即回滚
+            self.session.rollback()
+            raise e
+
+
+db = SQLAlchemy()
 
 
 class Base(db.Model):

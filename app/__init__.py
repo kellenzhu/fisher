@@ -1,10 +1,8 @@
 from flask import Flask
 from flask_login import LoginManager
-from flask_sqlalchemy import SQLAlchemy
-
+from app.models.base import db
 
 login_manager = LoginManager()
-db = SQLAlchemy()
 
 
 def create_app():
