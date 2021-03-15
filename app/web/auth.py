@@ -29,7 +29,7 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             jump_page = request.args.get("next")
-            if not jump_page or not jump_page.startswitch("/"):
+            if not jump_page or not jump_page.startswith("/"):
                 return redirect(url_for("web.login"))
             return redirect(jump_page)
         else:

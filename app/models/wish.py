@@ -17,4 +17,4 @@ class Wish(Base):
     # 图书从API获取没保存至数据库，注释以下
     # book = relationship("Book")
     # bid = Column(Integer, ForeignKey("book.id"))
-    isdn = Column(String(15), nullable=False)
+    isbn = Column(String(15), nullable=False)

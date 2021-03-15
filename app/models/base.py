@@ -1,7 +1,7 @@
 from contextlib import contextmanager
 
 from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
-from sqlalchemy import Column, SmallInteger
+from sqlalchemy import Column, SmallInteger, Integer
 
 
 class SQLAlchemy(_SQLAlchemy):
@@ -22,7 +22,7 @@ db = SQLAlchemy()
 class Base(db.Model):
     # 不创建表，Base仅作为基类使用
     __abstract__ = True
-    # create_time = Column("create_time", Integer)
+    create_time = Column("create_time", Integer)
 
     # 用户做删除操作，status = 0
     status = Column(SmallInteger, default=1)
