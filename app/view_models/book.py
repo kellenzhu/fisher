@@ -5,9 +5,11 @@ class BookViewModel:
         self.pages = book["pages"]
         self.author = "、".join(book["author"])
         self.price = book["price"]
-        self.summary = book["summary"] or ""
+        self.summary = book["summary"].replace("\\n", "") or ""
         self.image = book["image"]
         self.isbn = book["isbn"]
+        self.pubdate = book["pubdate"]
+        self.binding = book["binding"]
 
     @property
     def intro(self):

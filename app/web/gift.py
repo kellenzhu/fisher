@@ -25,7 +25,7 @@ def save_to_gifts(isbn):
             db.session.add(gift)
     else:
         flash("这本书已经存在于心愿清单，请勿重复添加")
-    return
+    return redirect(url_for("web.book_detail", isbn=isbn))
 
 
 @web.route('/gifts/<gid>/redraw')
