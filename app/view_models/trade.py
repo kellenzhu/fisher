@@ -1,13 +1,13 @@
 class TradeInfo:
 
-    def __init__(self, info):
+    def __init__(self, db_obj):
         self.total = 0
         self.trades = []
-        self.__parse(info)
+        self.__parse(db_obj)
 
-    def __parse(self, info):
-        self.total = len(info)
-        self.trades = [self.__map_to_trade(gift_or_wish) for gift_or_wish in info]
+    def __parse(self, db_obj):
+        self.total = len(db_obj)
+        self.trades = [self.__map_to_trade(gift_or_wish) for gift_or_wish in db_obj]
 
     @staticmethod
     def __map_to_trade(gift_or_wish):

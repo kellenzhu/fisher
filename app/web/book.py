@@ -7,6 +7,7 @@ from app.models.gift import Gift
 from app.models.wish import Wish
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookCollection, BookViewModel
+from app.view_models.trade import TradeInfo
 from app.web import web
 
 
@@ -58,6 +59,7 @@ def book_detail(isbn):
             has_in_wish = True
     trade_gifts = Gift.query.filter_by(isbn=isbn, launched=False).all()
     trade_wishes = Wish.query.filter_by(isbn=isbn, launched=False).all()
-
-    return render_template("book_detail.html", book=book, wishes=[trade_wishes], gifts=[trade_gifts],
-                           has_in_gift=has_in_gift, has_in_wish=has_in_wish)
+    trade_gifts_models = TradeInfo(trade_gifts)
+    trade_wishes_models = TradeInfo(trade_wishes)
+    return render_template("book_detail.html", book=book, wishes=trade_wishes_models, gifts=trade_gifts_models,
+                           has_in_gifts=has_in_gift, has_in_wishes=has_in_wish)
