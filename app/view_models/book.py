@@ -5,7 +5,8 @@ class BookViewModel:
         self.pages = book["pages"]
         self.author = "、".join(book["author"])
         self.price = book["price"]
-        self.summary = book["summary"].replace("\\n", "") or ""
+        # self.summary = book["summary"].replace("\\n", "") or ""
+        self.summary = book["summary"]
         self.image = book["image"]
         self.isbn = book["isbn"]
         self.pubdate = book["pubdate"]
