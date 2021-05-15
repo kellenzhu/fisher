@@ -37,11 +37,11 @@ class MyTrades:
     def __parse(self):
         temp_trades = []
         for trades in self.__trades_of_mine:
-            my_trades = self.__maching(trades)
+            my_trades = self.__matching(trades)
             temp_trades.append(my_trades)
         return temp_trades
 
-    def __maching(self, trades):
+    def __matching(self, trades):
         count = 0
         for wish_count in self.__wish_count_list:
             if trades.isbn == wish_count["isbn"]:
