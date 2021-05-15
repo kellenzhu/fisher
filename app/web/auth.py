@@ -1,5 +1,5 @@
 from flask import render_template, request, flash, redirect, url_for
-from flask_login import login_user
+from flask_login import login_user, logout_user
 
 from app.forms.auth import RegisterForm, LoginForm
 from app.models.base import db
@@ -30,7 +30,7 @@ def login():
             login_user(user)
             jump_page = request.args.get("next")
             if not jump_page or not jump_page.startswith("/"):
-                return redirect(url_for("web.login"))
+                return redirect(url_for("web.index"))
             return redirect(jump_page)
         else:
             flash(message="用户不存在，请重新输入")
@@ -54,4 +54,5 @@ def change_password():
 
 @web.route('/logout')
 def logout():
-    pass
+    logout_user()
+    return redirect(url_for("web.index"))
